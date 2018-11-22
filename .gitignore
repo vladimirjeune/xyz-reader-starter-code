@@ -2,6 +2,9 @@
 *.apk
 *.ap_
 
+# DS_Store stuff
+.DS_Store
+
 # Files for the ART/Dalvik VM
 *.dex
 
@@ -35,6 +38,12 @@ captures/
 # Intellij
 *.iml
 .idea/workspace.xml
+
+# idea project files
+.idea/
+.idea/.name
+*.ipr
+*.iws
 
 # Keystore files
 *.jks
