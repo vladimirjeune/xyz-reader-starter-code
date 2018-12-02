@@ -22,4 +22,16 @@
     <color name="theme_primary_dark">#04561A</color>
     <color name="theme_accent">#04561A</color>
     <color name="ltgray">#ffe0e0e0</color>
+
+    <color name="brand_gradient_color_dark">@color/red_orange</color>
+    <color name="brand_gradient_color_light">@color/orange</color>
+
+
+
+
+    <!-- For private use only, public colors are above -->
+    <color name="red_orange">#FFFF512F</color>
+    <color name="orange">#FFFFA400</color>
+
+
 </resources>
