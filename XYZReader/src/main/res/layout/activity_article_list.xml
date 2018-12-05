@@ -14,11 +14,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:scrollbarStyle="outsideOverlay"
-            android:paddingTop="116dp"
             android:paddingLeft="@dimen/list_side_margin"
+            android:paddingTop="116dp"
             android:paddingRight="@dimen/list_side_margin"
-            android:paddingBottom="28dp" />
+            android:paddingBottom="28dp"
+            android:scrollbarStyle="outsideOverlay" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <FrameLayout
@@ -42,6 +42,16 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/logo" />
+
+            <!--&lt;!&ndash;- This is the white logo that is centered oddly. You wanted it to act like the PNG Vertically or Horizontally. But it is centered vertically, and off center horizontally &#45;&#45;—>-->
+            <!--<!—- https://stackoverflow.com/questions/39352366/vectordrawable-is-not-center-aligned -—>-->
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:contentDescription="@string/app_name"-->
+                <!--android:tintMode="src_in"-->
+                <!--android:tint="@android:color/white"-->
+                <!--android:src="@drawable/ic_logo_black" />-->
 
         </android.support.v7.widget.Toolbar>
     </FrameLayout>

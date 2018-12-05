@@ -28,27 +28,29 @@
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="4"
             android:paddingLeft="16dp"
             android:paddingTop="16dp"
             android:paddingRight="16dp"
             android:paddingBottom="4dp"
-            android:textColor="@color/ltgray"
-            tools:text="Second Variety"
-            android:ellipsize="end"
-            android:maxLines="4" />
+            android:textColor="@color/list_title_color"
+            android:textStyle="bold"
+            tools:text="Second Variety" />
 
         <TextView
             android:id="@+id/article_subtitle"
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingBottom="16dp"
-            android:textColor="#6000"
-            tools:text="May 12, 1951\nby Sam Nickleby"
-            android:maxLines="2"
-            android:ellipsize="end" />
+            android:textColor="@color/list_subtitle_color"
+            android:textSize="12sp"
+            tools:text="May 12, 1951\nby Sam Nickleby" />
     </LinearLayout>
 
 </android.support.v7.widget.CardView>
