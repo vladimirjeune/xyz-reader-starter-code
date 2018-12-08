@@ -27,7 +27,7 @@ public class RemoteEndpointUtil {
             Log.e(TAG, "Error fetching items JSON", e);
             return null;
         }
-
+        // TODO: Parse String to remove \r\ns. Test it out on Ideone
         // Parse JSON
         try {
             JSONTokener tokener = new JSONTokener(itemsJson);
