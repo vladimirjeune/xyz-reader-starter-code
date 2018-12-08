@@ -68,7 +68,7 @@
                         android:textSize="@dimen/detail_title_text_size"
                         tools:text="Altered Carbon"
                         android:ellipsize="end"
-                        android:maxLines="1"
+                        android:maxLines="2"
                         android:lineSpacingMultiplier="0.9" />
 
                     <TextView
@@ -78,6 +78,8 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white_50_percent"
                         tools:text="Richard K. Morgan"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         />
                 </LinearLayout>
 
@@ -88,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/detail_inner_horiz_margin"
                     android:layout_marginRight="@dimen/detail_inner_horiz_margin"
-                    android:fontFamily="serif"
+                    android:fontFamily="@font/app_serif_font"
                     android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
                     android:paddingBottom="@dimen/detail_body_bottom_margin"
                     android:textColor="@color/black_85_percent"
