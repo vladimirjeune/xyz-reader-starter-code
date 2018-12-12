@@ -9,5 +9,6 @@
 
     <string name="up">Up</string>
     <string name="tools_body_text">We’d like to know a lot more than we do about how planets create magnetic fields. After all, a major motivation for exoplanet research (though hardly the only one) is to find out whether there is other life in the universe. A magnetic field can protect planetary atmospheres from the effects of the host star’s stellar wind, a stream of charged particles that could disrupt life’s formation. Planets in close orbits of a central star are going to be particularly vulnerable.</string>
+    <string name="book_cover">Book cover image</string>
 
 </resources>

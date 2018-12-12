@@ -1,4 +1,5 @@
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,33 +12,54 @@
     android:focusable="true"
     android:foreground="?selectableItemBackground">
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout_list_item_article"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        tools:background="@android:color/black"
+        >
 
         <!--suppress AndroidLintContentDescription -->
-        <com.example.xyzreader.ui.DynamicHeightNetworkImageView
+        <!--<com.example.xyzreader.ui.DynamicHeightNetworkImageView-->
+            <!--android:id="@+id/thumbnail"-->
+            <!--android:layout_width="175dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--android:background="@color/photo_placeholder" />-->
+
+        <!--             tools:src="@tools:sample/backgrounds/scenic" -->
+        <ImageView
             android:id="@+id/thumbnail"
-            android:layout_width="175dp"
-            android:layout_height="100dp"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
             android:scaleType="centerCrop"
-            android:background="@color/photo_placeholder" />
+            android:background="@color/photo_placeholder"
+            app:layout_constraintDimensionRatio="H,3:2"
+            app:layout_constraintTop_toTopOf="@id/constraintLayout_list_item_article"
+            app:layout_constraintLeft_toLeftOf="@id/constraintLayout_list_item_article"
+            app:layout_constraintRight_toRightOf="@id/constraintLayout_list_item_article"
+            android:contentDescription="@string/book_cover"
+            />
+
 
         <TextView
             android:id="@+id/article_title"
             style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="4"
-            android:paddingLeft="16dp"
-            android:paddingTop="16dp"
-            android:paddingRight="16dp"
-            android:paddingBottom="4dp"
-            android:textColor="@color/list_title_color"
+            tools:text="Second Variety"
             android:textStyle="bold"
-            tools:text="Second Variety" />
+            android:textColor="@color/list_title_color"
+            android:maxLines="4"
+            android:ellipsize="end"
+            android:paddingLeft="8dp"
+            android:paddingTop="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout_list_item_article"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout_list_item_article"
+            app:layout_constraintBottom_toTopOf="@+id/article_subtitle"
+            />
 
         <TextView
             android:id="@+id/article_subtitle"
@@ -46,12 +68,19 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="2"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingBottom="16dp"
+            android:paddingTop="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
             android:textColor="@color/list_subtitle_color"
             android:textSize="12sp"
-            tools:text="May 12, 1951\nby Sam Nickleby" />
-    </LinearLayout>
+            tools:text="May 12, 1951\nby Sam Nickleby"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout_list_item_article"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout_list_item_article"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout_list_item_article"
+
+            />
+
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>
