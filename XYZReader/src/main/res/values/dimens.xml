@@ -8,4 +8,11 @@
     <dimen name="fab_press_translation_z">6dp</dimen>
     <dimen name="fab_margin">24dp</dimen>
 
+    <dimen name="list_item_article_title_text_size">18sp</dimen>
+    <dimen name="list_item_article_subtitle_text_size">14sp</dimen>
+    <dimen name="list_item_article_side_text_padding">8dp</dimen>
+    <dimen name="list_item_article_top_bottom_text_padding">8dp</dimen>
+
+
+
 </resources>

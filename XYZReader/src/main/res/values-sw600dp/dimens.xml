@@ -4,4 +4,11 @@
     <dimen name="detail_body_text_size">20sp</dimen>
     <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.3</item>
     <dimen name="fab_margin">24dp</dimen>
+
+    <dimen name="list_item_article_title_text_size">24sp</dimen>
+    <dimen name="list_item_article_subtitle_text_size">16sp</dimen>
+    <dimen name="list_item_article_side_text_padding">8dp</dimen>
+    <dimen name="list_item_article_top_bottom_text_padding">8dp</dimen>
+
+
 </resources>

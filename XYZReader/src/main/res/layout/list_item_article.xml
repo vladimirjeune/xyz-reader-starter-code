@@ -28,11 +28,12 @@
             <!--android:background="@color/photo_placeholder" />-->
 
         <!--             tools:src="@tools:sample/backgrounds/scenic" -->
-        <ImageView
+        <com.example.xyzreader.ui.DynamicHeightNetworkImageView
             android:id="@+id/thumbnail"
             android:layout_height="0dp"
             android:layout_width="0dp"
             android:scaleType="centerCrop"
+            tools:src="@tools:sample/backgrounds/scenic"
             android:background="@color/photo_placeholder"
             app:layout_constraintDimensionRatio="H,3:2"
             app:layout_constraintTop_toTopOf="@id/constraintLayout_list_item_article"
@@ -42,20 +43,31 @@
             />
 
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/list_item_scrim_gradient"
+            app:layout_constraintTop_toTopOf="@id/constraintLayout_list_item_article"
+            app:layout_constraintLeft_toLeftOf="@id/constraintLayout_list_item_article"
+            app:layout_constraintRight_toRightOf="@id/constraintLayout_list_item_article"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout_list_item_article"
+            />
+
         <TextView
             android:id="@+id/article_title"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="Second Variety"
+            tools:text="The Legend of Sleepy Hollow"
             android:textStyle="bold"
             android:textColor="@color/list_title_color"
-            android:maxLines="4"
+            android:fontFamily="@font/app_serif_font"
+            android:textSize="@dimen/list_item_article_title_text_size"
+            android:maxLines="@integer/list_item_article_title_number_of_lines"
             android:ellipsize="end"
-            android:paddingLeft="8dp"
-            android:paddingTop="8dp"
-            android:paddingRight="8dp"
-            android:paddingBottom="8dp"
+            android:paddingLeft="@dimen/list_item_article_side_text_padding"
+            android:paddingTop="@dimen/list_item_article_top_bottom_text_padding"
+            android:paddingRight="@dimen/list_item_article_side_text_padding"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout_list_item_article"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout_list_item_article"
             app:layout_constraintBottom_toTopOf="@+id/article_subtitle"
@@ -66,15 +78,16 @@
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:text="Jan 1, 1820\nby Washington Irving"
+            android:textColor="@color/list_subtitle_color"
+            android:fontFamily="@font/app_serif_font"
+            android:textSize="@dimen/list_item_article_subtitle_text_size"
             android:ellipsize="end"
             android:maxLines="2"
-            android:paddingTop="8dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingBottom="8dp"
-            android:textColor="@color/list_subtitle_color"
-            android:textSize="12sp"
-            tools:text="May 12, 1951\nby Sam Nickleby"
+            android:paddingTop="@dimen/list_item_article_top_bottom_text_padding"
+            android:paddingLeft="@dimen/list_item_article_side_text_padding"
+            android:paddingRight="@dimen/list_item_article_side_text_padding"
+            android:paddingBottom="@dimen/list_item_article_top_bottom_text_padding"
             app:layout_constraintStart_toStartOf="@id/constraintLayout_list_item_article"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout_list_item_article"
             app:layout_constraintBottom_toBottomOf="@+id/constraintLayout_list_item_article"

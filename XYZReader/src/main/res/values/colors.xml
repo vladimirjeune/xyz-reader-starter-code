@@ -26,8 +26,8 @@
     <color name="brand_gradient_color_dark">@color/red_orange</color>
     <color name="brand_gradient_color_light">@color/orange</color>
 
-    <color name="list_title_color">@color/black_85_percent</color>
-    <color name="list_subtitle_color">@color/black_60_percent</color>
+    <color name="list_title_color">@color/white_85_percent</color>
+    <color name="list_subtitle_color">@color/white_75_percent</color>
 
     <color name="body_text_color">@color/black_85_percent</color>
 
@@ -40,6 +40,7 @@
     <color name="black_60_percent">#99000000</color>
 
     <color name="white_85_percent">#D9FFFFFF</color>
+    <color name="white_75_percent">#BFFFFFFF</color>
     <color name="white_60_percent">#99FFFFFF</color>
     <color name="white_50_percent">#80FFFFFF</color>
 
