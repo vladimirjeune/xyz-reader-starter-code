@@ -140,9 +140,10 @@ public class ArticleDetailActivity extends AppCompatActivity
         mPagerAdapter.notifyDataSetChanged();
     }
 
-    public void onUpButtonFloorChanged(long itemId, ArticleDetailFragment fragment) {
+    public void onUpButtonFloorChanged(long itemId, ArticleDetailCoordinatorFragment fragment) {
+//    public void onUpButtonFloorChanged(long itemId, ArticleDetailFragment fragment) {
         if (itemId == mSelectedItemId) {
-            mSelectedItemUpButtonFloor = fragment.getUpButtonFloor();
+//            mSelectedItemUpButtonFloor = fragment.getUpButtonFloor();  // TODO: RM when done testing other Fragment 1/11
             updateUpButtonPosition();
         }
     }
@@ -160,17 +161,19 @@ public class ArticleDetailActivity extends AppCompatActivity
         @Override
         public void setPrimaryItem(ViewGroup container, int position, Object object) {
             super.setPrimaryItem(container, position, object);
-            ArticleDetailFragment fragment = (ArticleDetailFragment) object;
-            if (fragment != null) {
-                mSelectedItemUpButtonFloor = fragment.getUpButtonFloor();
-                updateUpButtonPosition();
-            }
+            ArticleDetailCoordinatorFragment fragment = (ArticleDetailCoordinatorFragment) object;
+//            ArticleDetailFragment fragment = (ArticleDetailFragment) object;
+//            if (fragment != null) {   // TODO: Remove when done trying other Fragment 1/10
+//                mSelectedItemUpButtonFloor = fragment.getUpButtonFloor();
+//                updateUpButtonPosition();
+//            }
         }
 
         @Override
         public Fragment getItem(int position) {
             mCursor.moveToPosition(position);
-            return ArticleDetailFragment.newInstance(mCursor.getLong(ArticleLoader.Query._ID));
+//            return ArticleDetailFragment.newInstance(mCursor.getLong(ArticleLoader.Query._ID));
+            return ArticleDetailCoordinatorFragment.newInstance(mCursor.getLong(ArticleLoader.Query._ID));
         }
 
         @Override

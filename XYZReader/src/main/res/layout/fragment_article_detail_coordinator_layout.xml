@@ -88,7 +88,7 @@
     <!-- TODO: When get correct collapse behavior, think of putting FAB there -->
     <!--       Will disappear on upscroll and reappear at downScroll -->
     <!-- https://android.jlelse.eu/coordinatorlayout-basic-8040c74cf426 -->
-    <ImageButton android:id="@+id/share_fab"
+    <ImageButton android:id="@+id/share_fab_coord"
         android:stateListAnimator="@anim/fab_state_list_anim"
         android:background="@drawable/add_fab_background"
         android:layout_gravity="bottom|end"
