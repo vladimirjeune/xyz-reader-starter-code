@@ -120,7 +120,10 @@ public class ArticleDetailCoordinatorFragment extends Fragment implements
 
         mRootView = inflater.inflate(R.layout.fragment_article_detail_coordinator_layout, container, false);
 
-        mPhotoView.findViewById(R.id.share_fab_coord).setOnClickListener(new View.OnClickListener() {
+        mPhotoView = (ImageView) mRootView.findViewById(R.id.photo);
+        mPhotoContainerView = mRootView.findViewById(R.id.photo_container);
+
+        mRootView.findViewById(R.id.share_fab_coord).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(Intent.createChooser(ShareCompat.IntentBuilder.from(getActivity())
