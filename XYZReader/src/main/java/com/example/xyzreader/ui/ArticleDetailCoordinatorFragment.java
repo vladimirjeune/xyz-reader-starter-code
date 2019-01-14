@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.graphics.Palette;
@@ -157,7 +158,7 @@ public class ArticleDetailCoordinatorFragment extends Fragment implements
         }
 
         // Title should be set on CollapsingToolbarLayout
-        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout)
+        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout)
                 mRootView.findViewById(R.id.collapsing_toolbar);
         Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);  // Maybe the only wat to set subtitle. We'll see
         TextView bodyView = (TextView) mRootView.findViewById(R.id.article_body);
@@ -204,13 +205,18 @@ public class ArticleDetailCoordinatorFragment extends Fragment implements
                             Bitmap bitmap = imageContainer.getBitmap();
 
                             if (bitmap != null) {
-                                Palette p = Palette.generate(bitmap, 12);
-                                mMutedColor = p.getDarkMutedColor(0xFF333333);
+//                                Palette p = Palette.generate(bitmap, 12);
+//                                mMutedColor = p.getMutedColor(0xFF333333);
+//                                collapsingToolbarLayout.setContentScrimColor(mMutedColor);
+                                Palette.Builder paletteBuilder = getBuilderWithWhiteTextBGFilter(bitmap);
+                                setCollapsibleScrimColor(paletteBuilder);
                                 mPhotoView.setImageBitmap(imageContainer.getBitmap());
 
 //                                mRootView.findViewById(R.id.meta_bar)
 //                                        .setBackgroundColor(mMutedColor);
 //                                updateStatusBar();
+
+
                             }
                         }
 
@@ -218,6 +224,67 @@ public class ArticleDetailCoordinatorFragment extends Fragment implements
                         public void onErrorResponse(VolleyError volleyError) {
 
                         }
+
+                        /**
+                         * SETCOLLAPSIBLESCRIMCOLOR - Use PaletteBuilder to create an appropriate background color
+                         * for the scrim of the CollapsibleLayout.
+                         */
+                        private void setCollapsibleScrimColor(Palette.Builder paletteBuilder) {
+
+                            paletteBuilder.generate(new Palette.PaletteAsyncListener() {
+                                @Override
+                                public void onGenerated(@Nullable Palette palette) {
+
+                                    final int blackColor = 0;  // Actual color may have been set to grey
+                                    final int vibrantColor = palette.getVibrantColor(blackColor);
+                                    final int darkVibrantColor = palette.getDarkVibrantColor(blackColor);
+                                    final int darkMutedColor = palette.getDarkMutedColor(blackColor);
+                                    final int mutedColor = palette.getMutedColor(blackColor);
+                                    final int lightMutedColor = palette.getLightMutedColor(blackColor);
+                                    final int lightVibrantColor = palette.getLightVibrantColor(blackColor);
+
+                                    if (vibrantColor != blackColor) {
+                                        collapsingToolbarLayout.setContentScrimColor(vibrantColor);
+                                    } else if (darkVibrantColor != blackColor) {
+                                        collapsingToolbarLayout.setContentScrimColor(darkVibrantColor);
+                                    } else if (darkMutedColor != blackColor) {
+                                        collapsingToolbarLayout.setContentScrimColor(darkMutedColor);
+                                    } else if (mutedColor != blackColor) {
+                                        collapsingToolbarLayout.setContentScrimColor(mutedColor);
+                                    } else if (lightMutedColor != blackColor) {
+                                        collapsingToolbarLayout.setContentScrimColor(lightMutedColor);
+                                    } else if (lightVibrantColor != blackColor) {
+                                        collapsingToolbarLayout.setContentScrimColor(lightVibrantColor);
+                                    }
+                                }
+                            });
+                        }
+
+
+                        /**
+                         * GETBUILDERWITHWHITETEXTBGFILTER - Returns a Builder that has filtered out the Palettes
+                         * that would make white text placed on top of it look bad.
+                         * @param bitmap - The Bitmap we are looking at to get the appropriate background color
+                         * @return - Palette.Builder - Palettes that would make good white text backgrounds
+                         * based on Bitmap.
+                         */
+                        @NonNull
+                        private Palette.Builder getBuilderWithWhiteTextBGFilter(Bitmap bitmap) {
+                            return new Palette.Builder(bitmap)
+                                    .addFilter(new Palette.Filter() {
+                                        @Override
+                                        public boolean isAllowed(int rgb, float[] hsl) {
+                                            // From: https://stackoverflow.com/questions/3942878/
+                                            // how-to-decide-font-color-in-white-or-black-depending-on-background-color
+                                            float contrastFormulaBlackWhiteText = 0.179f;
+                                            int luminanceIndex = 2;
+                                            float luminance = hsl[luminanceIndex];
+
+                                            return luminance <= contrastFormulaBlackWhiteText;  // Good BG for White Text
+                                        }
+                                    });
+                        }
+
                     });
         } else {
             mRootView.setVisibility(View.GONE);

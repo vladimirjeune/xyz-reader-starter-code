@@ -20,6 +20,7 @@
             android:layout_height="match_parent"
             app:layout_scrollFlags="exitUntilCollapsed|scroll"
             app:titleEnabled="true"
+            app:contentScrim="?attr/colorAccent"
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp"
 
