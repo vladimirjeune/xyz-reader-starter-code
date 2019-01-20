@@ -30,6 +30,7 @@
     <color name="list_subtitle_color">@color/white_75_percent</color>
 
     <color name="body_text_color">@color/black_85_percent</color>
+    <color name="statusbar_details_color">@color/black_50_percent</color>
 
 
     <!-- For private use only, public colors are above -->
@@ -38,6 +39,7 @@
 
     <color name="black_85_percent">#D9000000</color>
     <color name="black_60_percent">#99000000</color>
+    <color name="black_50_percent">#80000000</color>
 
     <color name="white_85_percent">#D9FFFFFF</color>
     <color name="white_75_percent">#BFFFFFFF</color>

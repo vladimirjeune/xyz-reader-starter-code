@@ -61,6 +61,8 @@ public class ArticleDetailCoordinatorFragment extends Fragment implements
 //    private int mScrollY;
     private boolean mIsCard = false;
     private int mStatusBarFullOpacityBottom;
+    private TextView mBookTitleView;
+    private TextView mBylineView;
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
     // Use default locale format
@@ -162,14 +164,17 @@ public class ArticleDetailCoordinatorFragment extends Fragment implements
                 mRootView.findViewById(R.id.collapsing_toolbar);
         Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);  // Maybe the only wat to set subtitle. We'll see
         TextView bodyView = (TextView) mRootView.findViewById(R.id.article_body);
+        mBookTitleView = (TextView) mRootView.findViewById(R.id.article_title);
+        mBylineView = (TextView) mRootView.findViewById(R.id.article_byline);
 
         if (mCursor != null) {
             mRootView.setAlpha(0);
             mRootView.setVisibility(View.VISIBLE);
             mRootView.animate().alpha(1);
 
-            collapsingToolbarLayout.setTitleEnabled(true);
-            collapsingToolbarLayout.setTitle(mCursor.getString(ArticleLoader.Query.TITLE));
+            collapsingToolbarLayout.setTitleEnabled(false); // TODO: RM
+//            collapsingToolbarLayout.setTitle(mCursor.getString(ArticleLoader.Query.TITLE));
+            mBookTitleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
 
             Date publishedDate = parsePublishedDate();
             Spanned byline ;
@@ -193,7 +198,8 @@ public class ArticleDetailCoordinatorFragment extends Fragment implements
                                 + mCursor.getString(ArticleLoader.Query.AUTHOR)
                                 + "</font>");
             }
-            toolbar.setSubtitle(byline);
+//            toolbar.setSubtitle(byline);
+            mBylineView.setText(byline);
 
             bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY)
                     .replaceAll("(\r\n|\n)", "<br />")));
@@ -289,12 +295,11 @@ public class ArticleDetailCoordinatorFragment extends Fragment implements
         } else {
             mRootView.setVisibility(View.GONE);
             collapsingToolbarLayout.setTitle("N/A");
-            toolbar.setSubtitle("N/A");
+//            toolbar.setSubtitle("No/A");
             bodyView.setText("N/A");
         }
 
     }
-
 
 
     @Override
@@ -320,6 +325,7 @@ public class ArticleDetailCoordinatorFragment extends Fragment implements
 
         bindViews();
     }
+
 
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {

@@ -25,4 +25,8 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="Theme.Bacon.TranslucentStatusbar">
+        <item name="android:statusBarColor">@color/black_50_percent</item>
+    </style>
+
 </resources>
