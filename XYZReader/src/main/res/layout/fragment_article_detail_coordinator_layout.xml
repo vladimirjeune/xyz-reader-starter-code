@@ -5,6 +5,7 @@
     android:id="@+id/coordinator_layout_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     >
 
     <android.support.design.widget.AppBarLayout
@@ -20,6 +21,7 @@
             app:layout_scrollFlags="exitUntilCollapsed|scroll"
             app:titleEnabled="false"
             android:layout_gravity="bottom"
+            app:contentScrim="#0000"
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp"
             >
@@ -46,6 +48,7 @@
                 android:paddingTop="@dimen/detail_metabar_vert_padding"
                 android:paddingBottom="@dimen/detail_metabar_vert_padding"
                 android:layout_marginBottom="0dp"
+                app:layout_collapseMode="pin"
                 >
 
                 <TextView

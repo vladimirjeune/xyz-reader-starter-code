@@ -11,7 +11,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.view.OnApplyWindowInsetsListener;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.WindowInsetsCompat;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -22,6 +26,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -63,6 +68,8 @@ public class ArticleDetailCoordinatorFragment extends Fragment implements
     private int mStatusBarFullOpacityBottom;
     private TextView mBookTitleView;
     private TextView mBylineView;
+    private LinearLayout mLinearLayoutTitlesView;
+    private Toolbar mToolbar;
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
     // Use default locale format
@@ -137,6 +144,10 @@ public class ArticleDetailCoordinatorFragment extends Fragment implements
         });
 
         bindViews();
+
+        ViewCompat.requestApplyInsets(container);  // Trying to call onApply, may not need.
+
+
         return mRootView;
 
     }
@@ -162,8 +173,86 @@ public class ArticleDetailCoordinatorFragment extends Fragment implements
         // Title should be set on CollapsingToolbarLayout
         final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout)
                 mRootView.findViewById(R.id.collapsing_toolbar);
-        Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);  // Maybe the only wat to set subtitle. We'll see
+        final Toolbar toolbar = (Toolbar) mRootView.findViewById(R.id.toolbar);
+        toolbar.post(new Runnable() {
+            @Override
+            public void run() {
+                int toolbarHeight = toolbar.getHeight();
+                Log.d(TAG, "run() called. Toolbar height is: " + toolbarHeight);
+            }
+        });  // TODO: Does nothing can remove
+
+//         TODo: Put this in to see if can get anything dispatched
+        final CoordinatorLayout coordinatorLayout = mRootView.findViewById(R.id.coordinator_layout_detail);
+        ViewCompat.setOnApplyWindowInsetsListener(coordinatorLayout, new OnApplyWindowInsetsListener() {
+            @Override
+            public WindowInsetsCompat onApplyWindowInsets(View view, WindowInsetsCompat windowInsetsCompat) {
+                return windowInsetsCompat;
+            }
+        });
+
+
+
+
         TextView bodyView = (TextView) mRootView.findViewById(R.id.article_body);
+        mLinearLayoutTitlesView = (LinearLayout) mRootView.findViewById(R.id.meta_bar);
+
+
+        // Guaranteed to run after the view has been laid out, at least once. :
+        mLinearLayoutTitlesView.post(new Runnable() {
+            @Override
+            public void run() {
+                int metabarMinHeight = mLinearLayoutTitlesView.getMinimumHeight();
+                int metabarHeight = mLinearLayoutTitlesView.getHeight();
+//                Log.d(TAG, "run() called. Metabar [Min|Normal] height: [" + metabarMinHeight + "|"
+//                + metabarHeight +"]");
+
+                if (metabarHeight != 0) {
+//                    Log.i(TAG, "run: curr Height before: " + toolbar.getHeight());
+
+                    toolbar.getLayoutParams().height = metabarHeight + 25 + 16;
+
+                    toolbar.invalidate();
+                    toolbar.requestLayout();
+//                    Log.i(TAG, "run: new Height after: " + toolbar.getHeight());
+                }
+            }
+        });
+
+        // Set the margin for the top the way Chris Banes wants you to.
+        // https://www.youtube.com/watch?v=_mGDMVRO3iE&t=
+        // TODO:
+
+        ViewCompat.setOnApplyWindowInsetsListener(mLinearLayoutTitlesView, new OnApplyWindowInsetsListener() {
+            @Override
+            public WindowInsetsCompat onApplyWindowInsets(View view, WindowInsetsCompat windowInsetsCompat) {
+                Log.d(TAG, "onApplyWindowInsets() called with: view = [" + view + "], windowInsetsCompat = [" + windowInsetsCompat + "]");
+
+                // TODO: Remove when you can get this thing to be called.
+                //                int statusBarDisplacement = windowInsetsCompat.getSystemWindowInsetTop();
+//                int metabarHeight = mLinearLayoutTitlesView.getHeight();
+//
+//                if (metabarHeight != 0) {
+//                    toolbar.getLayoutParams().height = metabarHeight;
+//                    toolbar.invalidate();
+//                    toolbar.requestLayout();
+//                }
+//
+//
+//                ViewGroup.MarginLayoutParams marginLayoutParams
+//                        = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+//                marginLayoutParams.topMargin = statusBarDisplacement;
+//
+//                mLinearLayoutTitlesView.invalidate();
+//                mLinearLayoutTitlesView.requestLayout();
+
+
+                return windowInsetsCompat.consumeSystemWindowInsets();
+
+            }
+        });
+
+
         mBookTitleView = (TextView) mRootView.findViewById(R.id.article_title);
         mBylineView = (TextView) mRootView.findViewById(R.id.article_byline);
 
@@ -175,6 +264,8 @@ public class ArticleDetailCoordinatorFragment extends Fragment implements
             collapsingToolbarLayout.setTitleEnabled(false); // TODO: RM
 //            collapsingToolbarLayout.setTitle(mCursor.getString(ArticleLoader.Query.TITLE));
             mBookTitleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
+
+            // TODO: Get size for Sub/Title to find min value of Toolbar when collapsed.
 
             Date publishedDate = parsePublishedDate();
             Spanned byline ;
@@ -201,6 +292,19 @@ public class ArticleDetailCoordinatorFragment extends Fragment implements
 //            toolbar.setSubtitle(byline);
             mBylineView.setText(byline);
 
+            // TODO: Find height of metabar
+            // TODO: Make the min height of the Toolbar
+            // TODO: Cannot look for height in onCreate. So will be done in Runnable:
+            // https://stackoverflow.com/questions/3591784/views-getwidth-and-getheight-returns-0
+            // This part:: "2. Add a runnable to the layout queue: View.post()"
+//            int endToolbarSizeInPixels = mLinearLayoutTitlesView.getHeight();
+//            Log.i(TAG, "bindViews: endToolbarSizeInPixels:" + endToolbarSizeInPixels);
+//            mToolbar.setMinimumHeight(endToolbarSizeInPixels);
+
+
+
+
+
             bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY)
                     .replaceAll("(\r\n|\n)", "<br />")));
 
@@ -211,17 +315,10 @@ public class ArticleDetailCoordinatorFragment extends Fragment implements
                             Bitmap bitmap = imageContainer.getBitmap();
 
                             if (bitmap != null) {
-//                                Palette p = Palette.generate(bitmap, 12);
-//                                mMutedColor = p.getMutedColor(0xFF333333);
-//                                collapsingToolbarLayout.setContentScrimColor(mMutedColor);
-                                Palette.Builder paletteBuilder = getBuilderWithWhiteTextBGFilter(bitmap);
-                                setCollapsibleScrimColor(paletteBuilder);
+
+//                                Palette.Builder paletteBuilder = getBuilderWithWhiteTextBGFilter(bitmap);
+//                                setCollapsibleScrimColor(paletteBuilder);
                                 mPhotoView.setImageBitmap(imageContainer.getBitmap());
-
-//                                mRootView.findViewById(R.id.meta_bar)
-//                                        .setBackgroundColor(mMutedColor);
-//                                updateStatusBar();
-
 
                             }
                         }
