@@ -27,6 +27,12 @@
 
     <style name="Theme.Bacon.TranslucentStatusbar">
         <item name="android:statusBarColor">@color/black_50_percent</item>
+
+    </style>
+
+    <style name="ToolbarWhiteTheme" parent="@style/Theme.Bacon.TranslucentStatusbar">
+        <!-- Make the Up button white -->
+        <item name="colorControlNormal">@color/white_85_percent</item>
     </style>
 
 </resources>
