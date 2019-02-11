@@ -64,6 +64,7 @@
                     tools:text="Altered Carbon"
                     android:ellipsize="end"
                     android:maxLines="2"
+                    app:layout_behavior="com.example.xyzreader.ui.BookTitlesBehavior"
                     android:lineSpacingMultiplier="0.9" />
 
                 <TextView

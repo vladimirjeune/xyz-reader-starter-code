@@ -2,4 +2,14 @@
     <declare-styleable name="DrawInsetsFrameLayout">
         <attr name="insetBackground" format="color|reference" />
     </declare-styleable>
+
+    <declare-styleable name="BookTitlesBehavior">
+        <attr name="startXPosition" format="dimension"/>
+        <attr name="startToolbarPosition" format="dimension"/>
+        <attr name="startTitleTextSize" format="dimension" />
+        <attr name="finalTitleTextSize" format="dimension" />
+        <attr name="finalTitleTextPadding" format="dimension" />
+        <attr name="finalHeight" format="dimension" />
+    </declare-styleable>
+
 </resources>

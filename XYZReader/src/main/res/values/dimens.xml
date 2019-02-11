@@ -13,6 +13,10 @@
     <dimen name="list_item_article_side_text_padding">8dp</dimen>
     <dimen name="list_item_article_top_bottom_text_padding">8dp</dimen>
 
-
+    <dimen name="title_text_sp_regular">42sp</dimen>
+    <dimen name="title_text_sp_small">28sp</dimen>
+    <dimen name="toolbar_final_height">196dp</dimen>
+    <!-- Assuming 24dp for home arrow and 8dp padding. Correct if wrong -->
+    <dimen name="title_text_small_padding">32dp</dimen>
 
 </resources>
