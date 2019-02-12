@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ShareCompat;
@@ -46,7 +47,8 @@ import java.util.GregorianCalendar;
  * {@link ArticleDetailActivity} on handsets
  */
 public class ArticleDetailCoordinatorFragment extends Fragment implements
-        LoaderManager.LoaderCallbacks<Cursor> {
+        LoaderManager.LoaderCallbacks<Cursor>,
+        AppBarLayout.OnOffsetChangedListener {
 
     private static final String TAG = ArticleDetailCoordinatorFragment.class.getName();
 
@@ -441,5 +443,11 @@ public class ArticleDetailCoordinatorFragment extends Fragment implements
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         mCursor = null;
         bindViews();
+    }
+
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
+        int totalScroll = appBarLayout.getTotalScrollRange();
+        float percentage = (float) Math.abs(offset) / (float) totalScroll;
     }
 }
